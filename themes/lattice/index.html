@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BIS — Derivatives-led portfolio management</title>
+<meta name="description" content="BIS manages discretionary and systematic options strategies across global equity, index, and volatility markets.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* LATTICE — light quant. Visible grid, mono labels, electric accent, data as the hero. */
+:root{
+  --paper:#FFFFFF; --paper-2:#F6F8FA; --ink:#0E1116; --ink-2:#39424E;
+  --grid:#E2E7EC; --dim:#6A7585; --accent:#0047FF; --accent-soft:#E8EEFF;
+  --display:'Chivo',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --maxw:1200px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--display); font-size:16.5px; line-height:1.62; -webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+a{color:inherit}
+.wrap{width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:max(20px,env(safe-area-inset-left,0px)) max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{margin:0; text-wrap:balance}
+.eyebrow{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0 0 18px}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+.nav{position:sticky; top:0; z-index:20; background:rgba(255,255,255,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--grid)}
+.nav-in{display:flex; align-items:center; gap:26px; min-height:62px; flex-wrap:wrap}
+.brand{display:flex; align-items:baseline; gap:11px; margin-right:auto}
+.mark{font-size:21px; font-weight:700; letter-spacing:-.03em}
+.tag{font-family:var(--mono); font-size:9.5px; letter-spacing:.16em; color:var(--accent); background:var(--accent-soft); padding:4px 8px}
+.nav a.link{font-size:13.5px; font-weight:500; color:var(--ink-2); text-decoration:none}
+.nav a.link:hover,.nav a.link:focus-visible{color:var(--accent)}
+.btn{font-size:13.5px; font-weight:500; text-decoration:none; display:inline-flex; align-items:center; gap:7px; padding:10px 18px; background:var(--accent); color:#fff; border:1px solid var(--accent); transition:background .16s}
+.btn:hover,.btn:focus-visible{background:#0036C4; border-color:#0036C4}
+.btn.ghost{background:transparent; color:var(--ink); border-color:var(--grid)}
+.btn.ghost:hover,.btn.ghost:focus-visible{background:var(--paper-2); border-color:var(--ink-2)}
+.hero{border-bottom:1px solid var(--grid); background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px); background-size:56px 56px; background-position:center}
+.hero-in{padding-block:clamp(60px,9vw,108px); display:grid; grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr); gap:clamp(32px,5vw,64px); align-items:center}
+@media (max-width:900px){.hero-in{grid-template-columns:1fr; gap:36px}}
+.hero h1{font-size:clamp(2.2rem,5.2vw,3.9rem); font-weight:700; letter-spacing:-.04em; line-height:1.04; max-width:18ch}
+.hero .lede{font-size:clamp(1rem,1.7vw,1.18rem); color:var(--ink-2); max-width:52ch; margin:22px 0 0}
+.hero .acts{display:flex; gap:12px; flex-wrap:wrap; margin-top:32px}
+.loc{font-family:var(--mono); font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); margin:0 0 20px}
+.panel{background:var(--paper); border:1px solid var(--grid); padding:22px 22px 16px; min-width:0; margin:0}
+.panel .ph{display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:6px}
+.panel .pt{font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim)}
+.panel .pv{font-family:var(--mono); font-size:10.5px; color:var(--accent); letter-spacing:.1em}
+.panel figcaption{font-family:var(--mono); font-size:10.5px; color:var(--dim); margin-top:10px; line-height:1.6}
+.sec{padding-block:clamp(56px,7.5vw,96px); border-bottom:1px solid var(--grid)}
+.sec h2{font-size:clamp(1.6rem,3.1vw,2.4rem); font-weight:700; letter-spacing:-.03em; line-height:1.14; max-width:26ch}
+.cols{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; margin-top:52px}
+@media (max-width:900px){.cols{grid-template-columns:1fr}}
+.col{min-width:0; background:var(--paper-2); border:1px solid var(--grid); border-top:3px solid var(--accent); padding:26px 24px}
+.col .n{font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; color:var(--dim); display:block; margin-bottom:14px}
+.col h3{font-size:1.1rem; font-weight:700; letter-spacing:-.018em; margin-bottom:10px}
+.col p{margin:0; color:var(--ink-2); font-size:14.8px; line-height:1.62}
+.tbl-wrap{overflow-x:auto; margin-top:44px; border:1px solid var(--grid)}
+table{width:100%; border-collapse:collapse; font-size:14.2px; min-width:640px}
+th,td{text-align:left; padding:13px 18px; border-bottom:1px solid var(--grid)}
+thead th{font-family:var(--mono); font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:var(--dim); font-weight:400; background:var(--paper-2)}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:nth-child(even){background:var(--paper-2)}
+td.v{font-family:var(--mono); color:var(--accent); font-weight:500; font-variant-numeric:tabular-nums; white-space:nowrap}
+td.m{font-family:var(--mono); font-size:12px; color:var(--dim); white-space:nowrap}
+.note{font-size:12.8px; color:var(--dim); margin:20px 0 0; max-width:72ch; line-height:1.62}
+.rlist{margin-top:46px; display:grid; gap:0; border-top:1px solid var(--grid)}
+.r{display:flex; align-items:baseline; justify-content:space-between; gap:22px; padding:21px 0; border-bottom:1px solid var(--grid); text-decoration:none}
+.r h3{font-size:1.04rem; font-weight:500; letter-spacing:-.012em; min-width:0}
+.r:hover h3,.r:focus-visible h3{color:var(--accent)}
+.r .meta{font-family:var(--mono); font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--dim); white-space:nowrap}
+.access{background:var(--paper-2)}
+.access .inner{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:48px; align-items:start}
+@media (max-width:900px){.access .inner{grid-template-columns:1fr; gap:28px}}
+.access p{color:var(--ink-2); margin:18px 0 0; max-width:48ch; font-size:15.2px}
+.access .acts{display:flex; gap:12px; flex-wrap:wrap; margin-top:26px}
+footer{background:var(--ink); color:#C3CBD6; padding-block:clamp(44px,6vw,68px)}
+.disc{font-size:12.2px; line-height:1.74; max-width:92ch; margin:0; color:#9AA5B3}
+.flinks{display:flex; gap:20px; flex-wrap:wrap; margin:28px 0 0; padding:0; list-style:none}
+.flinks a{font-family:var(--mono); font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:#9AA5B3; text-decoration:none}
+.flinks a:hover,.flinks a:focus-visible{color:#fff}
+.copy{font-family:var(--mono); font-size:10.5px; letter-spacing:.11em; text-transform:uppercase; color:#68737F; margin:24px 0 0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-in">
+    <div class="brand"><span class="mark">BIS</span><span class="tag">THEME · LATTICE</span></div>
+    <a class="link" href="#strategy">Strategy</a>
+    <a class="link" href="#risk">Risk</a>
+    <a class="link" href="#research">Research</a>
+    <a class="link" href="#access">Investors</a>
+    <a class="link" href="../../index.html">All themes</a>
+    <a class="btn" href="#access">Investor login</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-in">
+      <div>
+        <p class="loc">[Full Legal Name] LP &nbsp;/&nbsp; [City], [ST]</p>
+        <h1>Derivatives-led portfolio management.</h1>
+        <p class="lede">BIS manages discretionary and systematic options strategies across global equity, index, and volatility markets.</p>
+        <div class="acts">
+          <a class="btn" href="#access">Investor login</a>
+          <a class="btn ghost" href="#strategy">Firm overview</a>
+        </div>
+      </div>
+      <figure class="panel">
+        <div class="ph"><span class="pt">Implied volatility by strike</span><span class="pv">[TICKER] · [DTE]d</span></div>
+        <svg viewBox="0 0 420 215" role="img" aria-label="Illustrative implied volatility smile: implied volatility is higher at low and high strikes and lowest near at-the-money.">
+          <g stroke="#E2E7EC" stroke-width="1">
+            <line x1="56" y1="14" x2="56" y2="176"/><line x1="56" y1="176" x2="406" y2="176"/>
+            <line x1="56" y1="138" x2="406" y2="138" stroke-dasharray="3 4"/>
+            <line x1="56" y1="98" x2="406" y2="98" stroke-dasharray="3 4"/>
+            <line x1="56" y1="58" x2="406" y2="58" stroke-dasharray="3 4"/>
+            <line x1="231" y1="14" x2="231" y2="176" stroke-dasharray="3 4"/>
+          </g>
+          <path d="M66 50 C122 90 182 130 231 133 C282 136 346 104 400 66" fill="none" stroke="#0047FF" stroke-width="2.4" stroke-linecap="round"/>
+          <circle cx="231" cy="133" r="4.5" fill="#0047FF"/>
+          <g fill="#6A7585" font-family="'JetBrains Mono',monospace" font-size="10">
+            <text x="12" y="62">[XX]%</text><text x="12" y="102">[XX]%</text><text x="12" y="142">[XX]%</text>
+            <text x="58" y="194">−[XX]%</text><text x="212" y="194">ATM</text><text x="362" y="194">+[XX]%</text>
+          </g>
+        </svg>
+        <figcaption>Illustrative shape only. Axis values are placeholders and do not represent any position, quote, or result.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="strategy">
+    <div class="wrap sec">
+      <p class="eyebrow">Strategy</p>
+      <h2>Three mandates, one risk framework.</h2>
+      <div class="cols">
+        <div class="col"><span class="n">MANDATE 01</span><h3>Volatility Arbitrage</h3><p>Relative-value positioning across the implied surface — term structure, skew, and cross-sectional dispersion — held inside pre-set Greek limits.</p></div>
+        <div class="col"><span class="n">MANDATE 02</span><h3>Systematic Overlay</h3><p>Rules-based hedging and premium programs layered onto concentrated or long-only portfolios, sized to a stated drawdown tolerance.</p></div>
+        <div class="col"><span class="n">MANDATE 03</span><h3>Defined-Risk Income</h3><p>Spread, collar, and calendar structures where maximum loss is contracted at entry rather than managed after the fact.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="risk">
+    <div class="wrap sec">
+      <p class="eyebrow">Risk</p>
+      <h2>Every position has a boundary before it has a thesis.</h2>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th scope="col">Measure</th><th scope="col">Limit</th><th scope="col">Review</th></tr></thead>
+          <tbody>
+            <tr><td>Portfolio net delta</td><td class="v">[±XX]% NAV</td><td class="m">Intraday</td></tr>
+            <tr><td>Net vega per vol point</td><td class="v">[±X.X]% NAV</td><td class="m">Intraday</td></tr>
+            <tr><td>Gamma at expiry</td><td class="v">[X.X]× notional</td><td class="m">Daily</td></tr>
+            <tr><td>Theta decay budget</td><td class="v">[X.X] bps / day</td><td class="m">Daily</td></tr>
+            <tr><td>Single-name concentration</td><td class="v">[XX]% gross</td><td class="m">Pre-trade</td></tr>
+            <tr><td>Stress: index −[XX]%, IV +[XX] pts</td><td class="v">[X.X]% NAV</td><td class="m">Daily</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Limits shown are illustrative placeholders. Final values are set by the Investment Committee and disclosed in the fund&rsquo;s offering documents.</p>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="wrap sec">
+      <p class="eyebrow">Research</p>
+      <h2>Notes from the desk.</h2>
+      <div class="rlist">
+        <a class="r" href="#"><h3>Term structure under scheduled event risk</h3><span class="meta">[Month YYYY] · Note</span></a>
+        <a class="r" href="#"><h3>Dispersion behaviour around an index rebalance</h3><span class="meta">[Month YYYY] · Note</span></a>
+        <a class="r" href="#"><h3>Why collar width matters more than collar level</h3><span class="meta">[Month YYYY] · Note</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="access" class="access">
+    <div class="wrap sec">
+      <div class="inner">
+        <div><p class="eyebrow">Investor access</p><h2>Access is limited to qualified purchasers.</h2></div>
+        <div>
+          <p>Fund documents, capital statements, and K-1s are available in the investor portal. Existing limited partners without credentials should contact Investor Relations.</p>
+          <div class="acts"><a class="btn" href="#">Investor login</a><a class="btn ghost" href="#">Request access</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="disc">This website is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any security or any interest in any fund. Any such offer will be made only to eligible investors by means of a confidential private placement memorandum and related subscription documents. Options and other derivative instruments involve substantial risk and are not suitable for all investors. Past performance is not indicative of future results. BIS is [registration status — to be confirmed by counsel].</p>
+    <ul class="flinks"><li><a href="#">Form ADV</a></li><li><a href="#">Form CRS</a></li><li><a href="#">Privacy policy</a></li><li><a href="#">Terms of use</a></li><li><a href="#">Business continuity</a></li><li><a href="#">Contact</a></li></ul>
+    <p class="copy">© [YYYY] [Full Legal Name] LP. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

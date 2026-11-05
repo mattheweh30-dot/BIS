@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BIS — Theme candidates</title>
+<meta name="description" content="Five homepage directions for BIS. Same placeholder content in each, so the comparison is about look and structure.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#FAFAF9; --surface:#FFFFFF; --fg:#17191C; --fg-2:#555D66; --dim:#7C848D;
+  --line:#E3E5E8; --accent:#1F4FD8; --warn-bg:#FFF6E5; --warn-line:#E8C073; --warn-fg:#6B4B10;
+  --sans:'Public Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#101215; --surface:#171A1E; --fg:#ECEEF1; --fg-2:#A8B0B9; --dim:#7F888F;
+    --line:#282C32; --accent:#7A9DFF; --warn-bg:#241D0E; --warn-line:#6B5520; --warn-fg:#E8C98A;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101215; --surface:#171A1E; --fg:#ECEEF1; --fg-2:#A8B0B9; --dim:#7F888F;
+  --line:#282C32; --accent:#7A9DFF; --warn-bg:#241D0E; --warn-line:#6B5520; --warn-fg:#E8C98A;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; background:var(--bg); color:var(--fg); font-family:var(--sans); font-size:16px; line-height:1.62; -webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{width:100%; max-width:1080px; margin-inline:auto; padding-inline:max(20px,env(safe-area-inset-left,0px)) max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{margin:0; text-wrap:balance}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+header{border-bottom:1px solid var(--line); padding-block:clamp(40px,6vw,68px) clamp(28px,4vw,40px)}
+.kicker{font-family:var(--mono); font-size:11px; letter-spacing:.17em; text-transform:uppercase; color:var(--accent); margin:0 0 16px}
+h1{font-size:clamp(1.9rem,4.4vw,2.9rem); font-weight:700; letter-spacing:-.03em; line-height:1.1; max-width:22ch}
+header p{font-size:clamp(1rem,1.7vw,1.1rem); color:var(--fg-2); max-width:62ch; margin:18px 0 0}
+.warn{display:grid; gap:8px; background:var(--warn-bg); border:1px solid var(--warn-line); color:var(--warn-fg); padding:18px 20px; margin-top:28px; font-size:14px; line-height:1.64}
+.warn strong{font-weight:600}
+.list{padding-block:clamp(34px,5vw,52px); display:grid; gap:18px}
+.card{background:var(--surface); border:1px solid var(--line); padding:24px; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:20px 24px; align-items:start}
+@media (max-width:680px){.card{grid-template-columns:1fr}}
+.card .hd{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px}
+.card h2{font-size:1.3rem; font-weight:700; letter-spacing:-.02em}
+.card .ref{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); border:1px solid var(--line); padding:3px 7px}
+.card p{margin:0; color:var(--fg-2); font-size:14.8px; max-width:62ch}
+.card dl{display:grid; grid-template-columns:auto minmax(0,1fr); gap:4px 14px; margin:16px 0 0; font-size:13px}
+.card dt{font-family:var(--mono); font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--dim); padding-top:3px}
+.card dd{margin:0; color:var(--fg-2)}
+.side{display:grid; gap:14px; justify-items:start}
+@media (max-width:680px){.side{justify-items:stretch}}
+.sw{display:flex; gap:0; border:1px solid var(--line)}
+.sw span{width:34px; height:34px; display:block}
+.open{font-size:13.5px; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; background:var(--accent); color:#fff; border:1px solid var(--accent); white-space:nowrap; justify-content:center}
+.open:hover,.open:focus-visible{filter:brightness(1.1)}
+footer{border-top:1px solid var(--line); padding-block:clamp(30px,4vw,48px)}
+footer p{font-size:13px; color:var(--dim); margin:0; max-width:76ch; line-height:1.7}
+footer code{font-family:var(--mono); font-size:12px; background:var(--surface); border:1px solid var(--line); padding:1px 5px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p class="kicker">BIS &nbsp;·&nbsp; Internal review</p>
+    <h1>Five homepage directions.</h1>
+    <p>Every theme carries identical placeholder content, so what you are comparing is typography, colour, density, and structure — not copy. Three take their visual posture from firms you already know; two are original. Pick one and the rest get deleted.</p>
+    <div class="warn">
+      <strong>Not ready to publish.</strong>
+      <span>All figures are bracketed tokens such as <code>[±XX]% NAV</code> on purpose, so no plausible-looking number can reach production by accident. There is no performance data, no track record, and no testimonials anywhere in these pages — those are the categories that attract SEC Marketing Rule problems. Everything here needs counsel review before the site goes public.</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap list">
+
+  <article class="card">
+    <div>
+      <div class="hd"><h2>Meridian</h2><span class="ref">Ref · Citadel</span></div>
+      <p>Deep navy, almost no colour, hairline rules instead of cards, and a headline set very large and very tight. The most conservative of the five and the one that reads most like an established multi-strategy firm.</p>
+      <dl>
+        <dt>Type</dt><dd>Archivo grotesque + IBM Plex Mono for data</dd>
+        <dt>Mood</dt><dd>Restrained, institutional, dark</dd>
+        <dt>Risk</dt><dd>Can read as generic if the copy stays thin</dd>
+      </dl>
+    </div>
+    <div class="side">
+      <div class="sw" aria-hidden="true"><span style="background:#0B1A2B"></span><span style="background:#0F2336"></span><span style="background:#5B9BD5"></span><span style="background:#8CA3B8"></span><span style="background:#E9EFF5"></span></div>
+      <a class="open" href="themes/meridian/index.html">Open Meridian</a>
+    </div>
+  </article>
+
+  <article class="card">
+    <div>
+      <div class="hd"><h2>Lattice</h2><span class="ref">Ref · Two Sigma</span></div>
+      <p>White, technical, built on a visible grid, with an implied-volatility curve sitting next to the headline. The only theme that puts a chart above the fold — it argues the firm is quantitative before you read a word.</p>
+      <dl>
+        <dt>Type</dt><dd>Chivo + JetBrains Mono labels</dd>
+        <dt>Mood</dt><dd>Quantitative, bright, engineered</dd>
+        <dt>Risk</dt><dd>A chart above the fold invites "where's the data?"</dd>
+      </dl>
+    </div>
+    <div class="side">
+      <div class="sw" aria-hidden="true"><span style="background:#FFFFFF"></span><span style="background:#F6F8FA"></span><span style="background:#0047FF"></span><span style="background:#6A7585"></span><span style="background:#0E1116"></span></div>
+      <a class="open" href="themes/lattice/index.html">Open Lattice</a>
+    </div>
+  </article>
+
+  <article class="card">
+    <div>
+      <div class="hd"><h2>Sovereign</h2><span class="ref">Ref · Blackstone</span></div>
+      <p>Navy and stone with brass hairlines and a transitional serif, centred in the hero the way a bank's annual report is centred. The most traditional direction, and the easiest to make look expensive with photography later.</p>
+      <dl>
+        <dt>Type</dt><dd>Newsreader serif + Public Sans</dd>
+        <dt>Mood</dt><dd>Classical, establishment, formal</dd>
+        <dt>Risk</dt><dd>Reads older; can feel like private banking, not a fund</dd>
+      </dl>
+    </div>
+    <div class="side">
+      <div class="sw" aria-hidden="true"><span style="background:#14213D"></span><span style="background:#A98A52"></span><span style="background:#F4F5F2"></span><span style="background:#4C5668"></span><span style="background:#0D1628"></span></div>
+      <a class="open" href="themes/sovereign/index.html">Open Sovereign</a>
+    </div>
+  </article>
+
+  <article class="card">
+    <div>
+      <div class="hd"><h2>Vantage</h2><span class="ref">Original</span></div>
+      <p>Editorial and asymmetric: a 7/5 grid, an optical serif at display size, one vertical rule doing the work six borders would, and a deep teal instead of the usual corporate blue. Closest to a design-led boutique.</p>
+      <dl>
+        <dt>Type</dt><dd>Fraunces variable serif + Karla</dd>
+        <dt>Mood</dt><dd>Editorial, confident, boutique</dd>
+        <dt>Risk</dt><dd>The most opinionated — ages fastest if tastes shift</dd>
+      </dl>
+    </div>
+    <div class="side">
+      <div class="sw" aria-hidden="true"><span style="background:#E9EAE6"></span><span style="background:#1F5E57"></span><span style="background:#1B1E1C"></span><span style="background:#4F5551"></span><span style="background:#C2C6BE"></span></div>
+      <a class="open" href="themes/vantage/index.html">Open Vantage</a>
+    </div>
+  </article>
+
+  <article class="card">
+    <div>
+      <div class="hd"><h2>Terminal</h2><span class="ref">Original</span></div>
+      <p>The trading desk as the brand. Warm black, sodium amber, zero corner radius, monospace headlines, and an exposure board in the hero showing the firm's own Greek limits. The only theme that looks like the thing you actually do all day.</p>
+      <dl>
+        <dt>Type</dt><dd>IBM Plex Mono display + IBM Plex Sans</dd>
+        <dt>Mood</dt><dd>Operational, dense, unmistakably derivatives</dd>
+        <dt>Risk</dt><dd>Allocators may read it as a prop shop, not a fund</dd>
+      </dl>
+    </div>
+    <div class="side">
+      <div class="sw" aria-hidden="true"><span style="background:#0C0B09"></span><span style="background:#1B1A15"></span><span style="background:#E8A33D"></span><span style="background:#8C8778"></span><span style="background:#E9E4D7"></span></div>
+      <a class="open" href="themes/terminal/index.html">Open Terminal</a>
+    </div>
+  </article>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>This chooser page is a working tool, not part of the site. Once a theme is picked, its folder moves to the repository root, the other four are deleted, and this file is replaced by the real homepage. Each theme page links back here via <code>All themes</code> in its nav.</p>
+  </div>
+</footer>
+</body>
+</html>

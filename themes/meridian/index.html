@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BIS — Derivatives-led portfolio management</title>
+<meta name="description" content="BIS manages discretionary and systematic options strategies across global equity, index, and volatility markets.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* MERIDIAN — dark institutional. Hairline rules, no cards, oversized tight display type. */
+:root{
+  --ink:#060D14; --navy:#0B1A2B; --surface:#0F2336; --line:#1C3A54;
+  --fg:#E9EFF5; --fg-dim:#8CA3B8; --accent:#5B9BD5;
+  --display:'Archivo',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --maxw:1180px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--navy); color:var(--fg);
+  font-family:var(--display); font-weight:400; font-size:17px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%}
+a{color:inherit}
+.wrap{width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:max(20px,env(safe-area-inset-left,0px)) max(20px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin:0 0 20px}
+h1,h2,h3{text-wrap:balance; margin:0}
+/* nav */
+.nav{position:sticky; top:0; z-index:20; background:rgba(6,13,20,.88); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+.nav-in{display:flex; align-items:center; gap:28px; min-height:64px; flex-wrap:wrap}
+.brand{display:flex; align-items:baseline; gap:12px; margin-right:auto}
+.mark{font-size:22px; font-weight:600; letter-spacing:-.02em}
+.tag{font-family:var(--mono); font-size:10px; letter-spacing:.16em; color:var(--fg-dim); border:1px solid var(--line); padding:3px 7px}
+.nav a.link{font-size:14px; color:var(--fg-dim); text-decoration:none; transition:color .18s}
+.nav a.link:hover,.nav a.link:focus-visible{color:var(--fg)}
+.btn{font-family:var(--display); font-size:14px; font-weight:500; text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border:1px solid var(--accent); color:var(--fg); transition:background .18s,color .18s}
+.btn:hover,.btn:focus-visible{background:var(--accent); color:var(--ink)}
+.btn.ghost{border-color:var(--line); color:var(--fg-dim)}
+.btn.ghost:hover,.btn.ghost:focus-visible{background:transparent; border-color:var(--fg-dim); color:var(--fg)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+/* hero */
+.hero{padding-block:clamp(72px,13vw,150px) clamp(56px,9vw,104px); border-bottom:1px solid var(--line)}
+.hero h1{font-size:clamp(2.4rem,6.6vw,5rem); font-weight:600; letter-spacing:-.035em; line-height:1.02; max-width:16ch}
+.hero p.lede{font-size:clamp(1.05rem,2vw,1.3rem); color:var(--fg-dim); max-width:58ch; margin:28px 0 0; line-height:1.55}
+.hero .acts{display:flex; gap:14px; flex-wrap:wrap; margin-top:40px}
+.loc{font-family:var(--mono); font-size:12px; letter-spacing:.1em; color:var(--fg-dim); margin:0 0 24px; text-transform:uppercase}
+/* sections */
+section{border-bottom:1px solid var(--line)}
+.sec{padding-block:clamp(60px,8vw,100px)}
+.sec h2{font-size:clamp(1.7rem,3.4vw,2.6rem); font-weight:500; letter-spacing:-.025em; line-height:1.14; max-width:26ch}
+.sec .intro{display:grid; grid-template-columns:minmax(0,1fr); gap:10px}
+.cols{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0; margin-top:60px; border-top:1px solid var(--line)}
+.col{min-width:0; padding:30px 28px 0 0; border-right:1px solid var(--line)}
+.col:last-child{border-right:0; padding-right:0}
+.col .n{font-family:var(--mono); font-size:11px; color:var(--accent); letter-spacing:.14em; display:block; margin-bottom:14px}
+.col h3{font-size:1.16rem; font-weight:600; letter-spacing:-.012em; margin-bottom:12px}
+.col p{margin:0; color:var(--fg-dim); font-size:15px; line-height:1.62}
+@media (max-width:860px){.cols{grid-template-columns:1fr}.col{border-right:0; border-bottom:1px solid var(--line); padding:26px 0; }.col:last-child{border-bottom:0}}
+/* table */
+.tbl-wrap{overflow-x:auto; margin-top:48px; border-top:1px solid var(--line)}
+table{width:100%; border-collapse:collapse; font-size:14.5px; min-width:620px}
+th,td{text-align:left; padding:15px 18px 15px 0; border-bottom:1px solid var(--line); vertical-align:top}
+th{font-family:var(--mono); font-size:10.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--fg-dim); font-weight:400; padding-top:18px; padding-bottom:12px}
+td.v{font-family:var(--mono); color:var(--accent); font-variant-numeric:tabular-nums; white-space:nowrap}
+td.m{color:var(--fg-dim); font-family:var(--mono); font-size:12.5px; white-space:nowrap}
+.note{font-size:13px; color:var(--fg-dim); margin:22px 0 0; max-width:72ch; line-height:1.6}
+/* research */
+.rlist{margin-top:52px; border-top:1px solid var(--line)}
+.r{display:flex; align-items:baseline; justify-content:space-between; gap:24px; padding:24px 0; border-bottom:1px solid var(--line); text-decoration:none; transition:padding-left .2s}
+.r:hover,.r:focus-visible{padding-left:10px}
+.r h3{font-size:1.1rem; font-weight:500; letter-spacing:-.01em; min-width:0}
+.r .meta{font-family:var(--mono); font-size:11.5px; color:var(--fg-dim); letter-spacing:.08em; white-space:nowrap; text-transform:uppercase}
+/* access */
+.access{background:var(--ink)}
+.access .inner{display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:56px; align-items:start}
+@media (max-width:860px){.access .inner{grid-template-columns:1fr; gap:32px}}
+.access p{color:var(--fg-dim); margin:20px 0 0; max-width:50ch; font-size:15.5px}
+.access .acts{display:flex; gap:14px; flex-wrap:wrap; margin-top:28px}
+/* footer */
+footer{background:var(--ink); padding-block:clamp(48px,6vw,72px)}
+.disc{font-size:12.5px; line-height:1.72; color:var(--fg-dim); max-width:92ch; margin:0}
+.flinks{display:flex; gap:22px; flex-wrap:wrap; margin:32px 0 0; padding:0; list-style:none}
+.flinks a{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-dim); text-decoration:none}
+.flinks a:hover,.flinks a:focus-visible{color:var(--fg)}
+.copy{font-family:var(--mono); font-size:11px; letter-spacing:.1em; color:#5A7490; margin:28px 0 0; text-transform:uppercase}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-in">
+    <div class="brand"><span class="mark">BIS</span><span class="tag">THEME · MERIDIAN</span></div>
+    <a class="link" href="#strategy">Strategy</a>
+    <a class="link" href="#risk">Risk</a>
+    <a class="link" href="#research">Research</a>
+    <a class="link" href="#access">Investors</a>
+    <a class="link" href="../../index.html">All themes</a>
+    <a class="btn" href="#access">Investor login</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="loc">[Full Legal Name] LP &nbsp;·&nbsp; [City], [ST]</p>
+      <h1>Derivatives-led portfolio management.</h1>
+      <p class="lede">BIS manages discretionary and systematic options strategies across global equity, index, and volatility markets.</p>
+      <div class="acts">
+        <a class="btn" href="#access">Investor login</a>
+        <a class="btn ghost" href="#strategy">Firm overview</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="strategy">
+    <div class="wrap sec">
+      <div class="intro">
+        <p class="eyebrow">Strategy</p>
+        <h2>Three mandates, one risk framework.</h2>
+      </div>
+      <div class="cols">
+        <div class="col">
+          <span class="n">01</span>
+          <h3>Volatility Arbitrage</h3>
+          <p>Relative-value positioning across the implied surface — term structure, skew, and cross-sectional dispersion — held inside pre-set Greek limits.</p>
+        </div>
+        <div class="col">
+          <span class="n">02</span>
+          <h3>Systematic Overlay</h3>
+          <p>Rules-based hedging and premium programs layered onto concentrated or long-only portfolios, sized to a stated drawdown tolerance.</p>
+        </div>
+        <div class="col">
+          <span class="n">03</span>
+          <h3>Defined-Risk Income</h3>
+          <p>Spread, collar, and calendar structures where maximum loss is contracted at entry rather than managed after the fact.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="risk">
+    <div class="wrap sec">
+      <div class="intro">
+        <p class="eyebrow">Risk</p>
+        <h2>Every position has a boundary before it has a thesis.</h2>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th scope="col">Measure</th><th scope="col">Limit</th><th scope="col">Review</th></tr></thead>
+          <tbody>
+            <tr><td>Portfolio net delta</td><td class="v">[±XX]% NAV</td><td class="m">Intraday</td></tr>
+            <tr><td>Net vega per vol point</td><td class="v">[±X.X]% NAV</td><td class="m">Intraday</td></tr>
+            <tr><td>Gamma at expiry</td><td class="v">[X.X]× notional</td><td class="m">Daily</td></tr>
+            <tr><td>Theta decay budget</td><td class="v">[X.X] bps / day</td><td class="m">Daily</td></tr>
+            <tr><td>Single-name concentration</td><td class="v">[XX]% gross</td><td class="m">Pre-trade</td></tr>
+            <tr><td>Stress: index −[XX]%, IV +[XX] pts</td><td class="v">[X.X]% NAV</td><td class="m">Daily</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Limits shown are illustrative placeholders. Final values are set by the Investment Committee and disclosed in the fund&rsquo;s offering documents.</p>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="wrap sec">
+      <div class="intro">
+        <p class="eyebrow">Research</p>
+        <h2>Notes from the desk.</h2>
+      </div>
+      <div class="rlist">
+        <a class="r" href="#"><h3>Term structure under scheduled event risk</h3><span class="meta">[Month YYYY] · Note</span></a>
+        <a class="r" href="#"><h3>Dispersion behaviour around an index rebalance</h3><span class="meta">[Month YYYY] · Note</span></a>
+        <a class="r" href="#"><h3>Why collar width matters more than collar level</h3><span class="meta">[Month YYYY] · Note</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="access" class="access">
+    <div class="wrap sec">
+      <div class="inner">
+        <div>
+          <p class="eyebrow">Investor access</p>
+          <h2>Access is limited to qualified purchasers.</h2>
+        </div>
+        <div>
+          <p>Fund documents, capital statements, and K-1s are available in the investor portal. Existing limited partners without credentials should contact Investor Relations.</p>
+          <div class="acts">
+            <a class="btn" href="#">Investor login</a>
+            <a class="btn ghost" href="#">Request access</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="disc">This website is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any security or any interest in any fund. Any such offer will be made only to eligible investors by means of a confidential private placement memorandum and related subscription documents. Options and other derivative instruments involve substantial risk and are not suitable for all investors. Past performance is not indicative of future results. BIS is [registration status — to be confirmed by counsel].</p>
+    <ul class="flinks">
+      <li><a href="#">Form ADV</a></li><li><a href="#">Form CRS</a></li><li><a href="#">Privacy policy</a></li><li><a href="#">Terms of use</a></li><li><a href="#">Business continuity</a></li><li><a href="#">Contact</a></li>
+    </ul>
+    <p class="copy">© [YYYY] [Full Legal Name] LP. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
